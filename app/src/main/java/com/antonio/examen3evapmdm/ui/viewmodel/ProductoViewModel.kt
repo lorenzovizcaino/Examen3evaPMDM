@@ -2,6 +2,7 @@ package com.antonio.examen3evapmdm.ui.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.antonio.examen3evapmdm.ui.model.Producto
 import com.antonio.examen3evapmdm.ui.model.ProductoCarrito
@@ -12,17 +13,17 @@ class ProductoViewModel {
     var lista= mutableListOf<Producto>(
 
         Producto(1,"Camisa","Vietnan","34.90","Rojo",false),
-        Producto(1,"Camisa","Roma","24.90","Rojo",false),
-        Producto(1,"Camisa","Camboya","35.90","Rojo",false),
-        Producto(1,"Camisa","Hawai","134.90","Rojo",false),
-        Producto(1,"Camisa","Estambul","4.90","Rojo",false),
-        Producto(1,"Camisa","Paris","54.90","Rojo",false),
-        Producto(1,"Pantalon","Paris","54.90","Rojo",false),
-        Producto(1,"Pantalon","Roma","24.90","Rojo",false),
-        Producto(1,"Pantalon","Camboya","35.90","Rojo",false),
-        Producto(1,"Pantalon","Hawai","134.90","Rojo",false),
-        Producto(1,"Pantalon","Estambul","4.90","Rojo",false),
-        Producto(1,"Pantalon","Paris","54.90","Rojo",false),
+        Producto(2,"Camisa","Roma","24.90","Rojo",false),
+        Producto(3,"Camisa","Camboya","35.90","Rojo",false),
+        Producto(4,"Camisa","Hawai","134.90","Rojo",false),
+        Producto(5,"Camisa","Estambul","4.90","Rojo",false),
+        Producto(6,"Camisa","Paris","54.90","Rojo",false),
+        Producto(7,"Pantalon","Paris","54.90","Rojo",false),
+        Producto(8,"Pantalon","Roma","24.90","Rojo",false),
+        Producto(9,"Pantalon","Camboya","35.90","Rojo",false),
+        Producto(10,"Pantalon","Hawai","134.90","Rojo",false),
+        Producto(11,"Pantalon","Estambul","4.90","Rojo",false),
+        Producto(12,"Pantalon","Paris","54.90","Rojo",false),
     )
         private set
 
@@ -59,8 +60,10 @@ class ProductoViewModel {
     var contadorProductos by mutableStateOf(0)
         private set
 
-    var format= DecimalFormat("#,###.##")
+    var format= DecimalFormat("#,###.00")
         private set
+
+    var isCheckedScafold by mutableStateOf(false)
 
 
 
@@ -116,6 +119,13 @@ class ProductoViewModel {
 
     fun getTotalFormateado(cantidad:Double): String {
         return format.format(cantidad)
+    }
+
+    fun set_ContadorProductos(contadorProductos:Int){
+        this.contadorProductos=contadorProductos
+    }
+    fun set_SumaProductos(sumaProductos:Double){
+        this.sumaProductos=sumaProductos
     }
 
 }

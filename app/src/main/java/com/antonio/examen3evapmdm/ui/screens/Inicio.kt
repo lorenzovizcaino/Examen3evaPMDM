@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddShoppingCart
+import androidx.compose.material.icons.filled.ContactMail
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Card
@@ -58,13 +59,60 @@ fun Inicio(navController: NavHostController, viewModelProducto: ProductoViewMode
 @Composable
 fun MyTopBar(navController: NavHostController, viewModelProducto: ProductoViewModel) {
     val context= LocalContext.current
+
     TopAppBar(
 
 
         title = { Text("Comercio TEIS", fontWeight = FontWeight.Bold, fontSize = 20.sp) },
         actions = {
 
+            IconButton(onClick = { navController.navigate(route=Screens.ListaEmail.route) }) {
+                Icon(
+                    imageVector = Icons.Filled.ContactMail,
+                    contentDescription = "lista email",
+                    tint = Color.White
+                )
 
+
+            }
+
+
+            Checkbox(checked = viewModelProducto.isCheckedScafold,
+                onCheckedChange = {
+                    viewModelProducto.isCheckedScafold = it
+                    viewModelProducto.listaComprar.clear()
+                    if(viewModelProducto.isCheckedScafold){
+                        viewModelProducto.set_ContadorProductos(0)
+                        viewModelProducto.set_SumaProductos(0.0)
+                    }
+                    viewModelProducto.lista.forEach { item ->
+                        item.selecionado = viewModelProducto.isCheckedScafold
+                        viewModelProducto.set_ProductoCarrito(
+                            ProductoCarrito(
+                                item.id,
+                                item.tipo,
+                                item.modelo,
+                                item.precio,
+                                item.color
+                            )
+                        )
+
+                        if (viewModelProducto.isCheckedScafold) {
+
+                            viewModelProducto.sumarProductos(item.precio)
+                            viewModelProducto.sumarUnidadeProductos()
+                            viewModelProducto.listaComprar.add(viewModelProducto.productoCarrito)
+
+                        } else {
+                            viewModelProducto.restarProductos(item.precio)
+                            viewModelProducto.restarUnidadesProductos()
+                            viewModelProducto.listaComprar.remove(viewModelProducto.productoCarrito)
+                        }
+                    }
+
+                    navController.navigate(route = Screens.Inicio.route)
+
+                })
 
 
 

@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 import com.antonio.examen3evapmdm.ui.screens.Inicio
+import com.antonio.examen3evapmdm.ui.screens.ListaEmail
 
 import com.antonio.examen3evapmdm.ui.screens.Menu
 import com.antonio.examen3evapmdm.ui.screens.Registro
@@ -34,11 +35,16 @@ fun Navigation() {
         composable(route = Screens.Registro.route) {
             Registro(navController,viewModelLogin) //Nombre de la función composable a la que navegar
         }
+        composable(route = Screens.ListaEmail.route) {
+            ListaEmail(navController,viewModelLogin) //Nombre de la función composable a la que navegar
+        }
 
 
 
     }
 }
+
+
 
 
 

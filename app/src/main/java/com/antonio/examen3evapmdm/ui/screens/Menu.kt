@@ -24,6 +24,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.antonio.examen3evapmdm.ui.model.Email
 import com.antonio.examen3evapmdm.ui.navigation.Screens
 import com.antonio.examen3evapmdm.ui.viewmodel.LoginViewModel
 
@@ -78,6 +79,10 @@ fun Menu(navController: NavController, viewModelLogin: LoginViewModel) {
             .padding(end = 60.dp), onClick = {
             viewModelLogin.ValidarDatos()
             if (viewModelLogin.banderaAceso) {
+                viewModelLogin.guardarListaEnFichero(context)
+                viewModelLogin.set_Email(Email(viewModelLogin.usuario))
+                viewModelLogin.guardarEmailEnFichero(context,viewModelLogin.email)
+                println(viewModelLogin.email)
                 navController.navigate(route = Screens.Inicio.route)
 
             } else {
